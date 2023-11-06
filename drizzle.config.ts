@@ -1,12 +1,11 @@
-import { type Config } from "drizzle-kit";
-
 import { env } from "@/env.mjs";
+import type { Config } from "drizzle-kit";
 
 export default {
-  schema: "./src/server/db/schema.ts",
-  driver: "mysql2",
+  schema: "./schemas/*",
+  out: "./drizzle",
+  driver: "pg",
   dbCredentials: {
-    connectionString: env.DATABASE_URL,
+    connectionString: env.DATABASE_URL + `?sslmode=require`,
   },
-  tablesFilter: ["time-management-t3_*"],
 } satisfies Config;
