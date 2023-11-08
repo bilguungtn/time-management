@@ -31,6 +31,8 @@ declare module "next-auth" {
   // }
 }
 
+const allowedAccounts = ["b.baasansuren@gtn.co.jp", "bilguun889@gmail.com"];
+
 /**
  * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
  *
@@ -38,6 +40,20 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
+    signIn({ user, account, profile, email, credentials }) {
+      const isAllowedToSignIn = user.email
+        ? allowedAccounts.includes(user.email)
+        : false;
+
+      if (isAllowedToSignIn) {
+        return true;
+      } else {
+        // Return false to display a default error message
+        return false;
+        // Or you can return a URL to redirect to:
+        // return '/unauthorized'
+      }
+    },
     session: ({ session, user }) => ({
       ...session,
       user: {
