@@ -40,7 +40,8 @@
     "**/*.cjs",
     "**/*.mjs",
     ".next/types/**/*.ts",
-    "src/server/db/schemas/auth"
+    "src/server/db/schemas/auth",
+    "tailwind.config.ts"
   ],
   "exclude": [
     "node_modules"
